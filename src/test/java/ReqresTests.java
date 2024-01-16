@@ -27,14 +27,14 @@ public class ReqresTests extends TestBase {
                 .then()
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
-                .body(matchesJsonSchemaInClasspath("ListUsersSchema.json"));
+                .body(matchesJsonSchemaInClasspath("list_users_schema.json"));
     }
 
     @DisplayName("Тестирование запроса Get получить пользователя по его id")
     @Test
     void getSingleUserByIdTest() throws Exception {
 
-        String expectedResult = Files.readString(Paths.get("src/test/resources/SingleUserJson.json"));
+        String expectedResult = Files.readString(Paths.get("src/test/resources/single_user_response_body.json"));
 
         String responseBody = given()
                 .when()
@@ -50,7 +50,7 @@ public class ReqresTests extends TestBase {
     @Test
     void createNewUserTest() {
 
-        File jsonTemplate = new File("src/test/resources/UserTemplate.json");
+        File jsonTemplate = new File("src/test/resources/user_request_body.json");
 
         given()
                 .when()
@@ -59,7 +59,7 @@ public class ReqresTests extends TestBase {
                 .post("api/users")
                 .then()
                 .statusCode(HttpStatus.SC_CREATED)
-                .body(matchesJsonSchemaInClasspath("CreateUserSchema.json"))
+                .body(matchesJsonSchemaInClasspath("create_user_schema.json"))
                 .body("name", is("igafarov"))
                 .body("job", is("QA"));
     }
@@ -69,7 +69,7 @@ public class ReqresTests extends TestBase {
     @DisplayName("Тестирование запроса Put c обновлением данных Users по полю job")
     public void modifyUser() {
 
-        File jsonTemplate = new File("src/test/resources/UserTemplate.json");
+        File jsonTemplate = new File("src/test/resources/user_request_body.json");
 
         String id = given()
                 .when()
@@ -95,7 +95,7 @@ public class ReqresTests extends TestBase {
                 .statusCode(HttpStatus.SC_OK)
                 .body("name", is("igafarov"))
                 .body("job", is("DEV"))
-                .body(matchesJsonSchemaInClasspath("UpdateUserSchema.json"));
+                .body(matchesJsonSchemaInClasspath("update_user_schema.json"));
 
     }
 
@@ -103,7 +103,7 @@ public class ReqresTests extends TestBase {
     @DisplayName("Тестирование запроса Delete c удалением пользователя")
     public void deleteUser() {
 
-        File jsonTemplate = new File("src/test/resources/UserTemplate.json");
+        File jsonTemplate = new File("src/test/resources/user_request_body.json");
 
         String id = given()
                 .when()
