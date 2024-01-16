@@ -1,0 +1,12 @@
+git# Default ignored files
+/shelf/
+/.idea/workspace.xml
+
+build
+/.gradle/
+/.idea/
+gradle/
+/gradlew
+/gradlew.bat
+/settings.gradle
+
